@@ -1,13 +1,14 @@
 import React, { Component, PropTypes } from 'react'
 import {
     View,
-Text
+Text,
+    ToastAndroid
 } from 'react-native'
   import { connect } from 'react-redux'
 import { addTodo, completeTodo, setVisibilityFilter, VisibilityFilters } from '../actions'
 import AddTodo from '../components/AddTodo'
-/*import TodoList from '../components/TodoList'
-import Footer from '../components/Footer'*/
+import TodoList from '../components/TodoList'
+/*import Footer from '../components/Footer'*/
 
 class App extends Component {
     render() {
@@ -19,8 +20,14 @@ class App extends Component {
                 justifyContent: 'center',
                 alignItems: 'center'}}>
                 <AddTodo onAddClick={text => {
+                    ToastAndroid.show("text = "+text,ToastAndroid.SHORT);
                     dispatch(addTodo(text))
                 }}/>
+                <TodoList
+                    todos={visibleTodos}
+                    onTodoClick={index =>
+                     dispatch(completeTodo(index))
+                    } />
             </View>
         )
     }
