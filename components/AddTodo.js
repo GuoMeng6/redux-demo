@@ -9,7 +9,7 @@ Text,
 ToastAndroid,
 
 } from 'react-native'
-
+var textInput;
 export default class AddTodo extends Component {
 
     constructor(props){
@@ -23,11 +23,9 @@ export default class AddTodo extends Component {
 
     render() {
         return (
-            <View style={{ flex : 1,alignItems: 'center',}}>
-                <TextInput style={{height: 40, borderColor: 'gray', borderWidth: 1,width:200,marginTop:50}} onChangeText={(txt) => this.setState({
-                    text:txt
-                })
-                } value = {this.state.text}></TextInput>
+            <View style={{alignItems: 'center',}}>
+                <TextInput style={{height: 40, borderColor: 'gray', borderWidth: 1,width:200,marginTop:50}} onChangeText={(txt) => this.setState({text:txt})
+                } value = {this.state.text} ref = {(input) =>{textInput = input;}}></TextInput>
                 <TouchableOpacity style={{height:40,marginTop:20,width:100}} onPress= {this.handleClick.bind(this)}>
                     <Text style={{flex:1}}>Add</Text>
                 </TouchableOpacity>
@@ -37,6 +35,7 @@ export default class AddTodo extends Component {
 
     handleClick() {
         // const node = this.refs.input;
+        textInput.clear();
         this.props.onAddClick(this.state.text);
     }
 }
