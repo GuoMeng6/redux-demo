@@ -1,14 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import {
-    AppRegistry,
     StyleSheet,
     View,
     TextInput,
     TouchableOpacity,
-    Text,
-    ToastAndroid,
-
-} from 'react-native';
+    Text } from 'react-native';
 let textInput;
 export default class AddTodo extends Component {
 
@@ -21,15 +17,18 @@ export default class AddTodo extends Component {
 
   render() {
     return (
-            <View style={{ alignItems: 'center' }}>
-                <TextInput style={{ height: 40, borderColor: 'gray', borderWidth: 1, width: 200, marginTop: 50 }} onChangeText={txt => this.setState({ text: txt })
-                } value={this.state.text} ref={(input) => { textInput = input; }}
-                />
-                <TouchableOpacity style={{ height: 40, marginTop: 20, width: 100 }} onPress={this.handleClick.bind(this)}>
-                    <Text style={{ flex: 1 }}>Add</Text>
-                </TouchableOpacity>
-            </View>
-        );
+      <View style={{ alignItems: 'center' }}>
+        <TextInput
+          style={(styles.textInputStyle)}
+          onChangeText={txt => this.setState({ text: txt })}
+          value={this.state.text}
+          ref={(input) => { textInput = input; }}
+        />
+        <TouchableOpacity style={(styles.touchstyle)} onPress={this.handleClick.bind(this)}>
+          <Text style={{ flex: 1 }}>Add</Text>
+        </TouchableOpacity>
+      </View>
+    );
   }
 
   handleClick() {
@@ -42,3 +41,20 @@ export default class AddTodo extends Component {
 AddTodo.propTypes = {
   onAddClick: PropTypes.func.isRequired,
 };
+
+const styles = StyleSheet.create(
+  {
+    textInputStyle: {
+      height: 40,
+      borderColor: 'gray',
+      borderWidth: 1,
+      width: 200,
+      marginTop: 50,
+    },
+    touchstyle: {
+      height: 40,
+      marginTop: 20,
+      width: 100,
+    },
+  }
+);

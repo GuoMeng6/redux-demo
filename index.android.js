@@ -8,8 +8,6 @@ import React, { Component } from 'react';
 import {
     AppRegistry,
     StyleSheet,
-    Text,
-    View,
 } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -18,13 +16,11 @@ import todoApp from './js/reducers';
 
 const store = createStore(todoApp);
 class redux extends Component {
-
   render() {
     return (
-            <Provider store={store}>
-            <App />
-            </Provider>
-
+      <Provider store={store}>
+        <App />
+      </Provider>
         );
   }
 }

@@ -3,10 +3,10 @@ import {
     View,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { addTodo, deleteTodo, VisibilityFilters } from '../actions';
+import { addTodo, completeTodo, VisibilityFilters, setVisibilityFilter } from '../actions';
 import AddTodo from '../components/AddTodo';
 import TodoList from '../components/TodoList';
-/* import Footer from '../components/Footer'*/
+import Footer from '../components/Footer';
 
 class App extends Component {
   render() {
@@ -14,24 +14,22 @@ class App extends Component {
         // 通过调用 connect() 注入:
     const { dispatch, visibleTodos, visibilityFilter } = this.props;
     return (
-            <View style={{
-              flex: 1,
-            }}>
-                <AddTodo style={{
-                  height: 100,
-                }} onAddClick={(text) => {
-                  dispatch(addTodo(text));
-                }}
-                />
-                <TodoList style={{
-                  flex: 1,
-                }}
-                  todos={visibleTodos}
-                  onTodoClick={(index) => {
-                    dispatch(deleteTodo(index));
-                  }}
-                />
-            </View>
+      <View style={{ flex: 1 }}>
+        <AddTodo style={{ height: 100 }}
+          onAddClick={(text) => { dispatch(addTodo(text)); }}
+        />
+        <TodoList style={{ height: 200 }}
+          todos={visibleTodos}
+          onTodoClick={(index) => {
+            dispatch(completeTodo(index));
+          }}
+        />
+        <Footer filter={visibilityFilter}
+          onFilterChange={(nextFilter) => {
+            dispatch(setVisibilityFilter(nextFilter));
+          }}
+        />
+      </View>
         );
   }
 }
@@ -72,6 +70,3 @@ function select(state) {
 
 // 包装 component ，注入 dispatch 和 state 到其默认的 connect(select)(App) 中；
 export default connect(select)(App);
-
-
-// export default App;
