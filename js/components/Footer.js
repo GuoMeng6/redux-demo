@@ -9,12 +9,25 @@ import {
 
 
 const SHOW_ALL = 'SHOW_ALL';
+const SHOW_COMPLETED = 'SHOW_COMPLETED';
+const SHOW_ACTIVE = 'SHOW_ACTIVE';
 export default class Footer extends Component {
 
   clickFooter(filter) {
     ToastAndroid.show(`点击了footer  ${filter}`, ToastAndroid.SHORT);
     this.props.onFilterChange(SHOW_ALL);
   }
+
+  textShowAll() {
+    if (SHOW_ALL === this.props.filter) {
+      ToastAndroid.show(`SHOW_ALL = ${SHOW_ALL}  filter = ${this.props.filter}`, ToastAndroid.SHORT);
+      return true;
+    } else {
+      ToastAndroid.show(`SHOW_ALL = ${SHOW_ALL}  filter = ${this.props.filter}`, ToastAndroid.SHORT);
+      return false;
+    }
+  }
+
 
   render() {
     return (
@@ -25,7 +38,7 @@ export default class Footer extends Component {
             ToastAndroid.show('showAll', ToastAndroid.SHORT);
             this.props.onFilterChange(SHOW_ALL); }}
         >
-          <Text style={(styles.textstyle)}>All</Text>
+          <Text style={(SHOW_ALL === this.props.filter) ? (styles.textstyle) : (styles.textFalsestyle)}>All</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={(styles.touchstyle)}
@@ -34,7 +47,7 @@ export default class Footer extends Component {
             this.props.onFilterChange('SHOW_COMPLETED');
           }}
         >
-          <Text style={(styles.textstyle)}>Completed</Text>
+          <Text style={(SHOW_COMPLETED === this.props.filter) ? (styles.textstyle) : (styles.textFalsestyle)}>Completed</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={(styles.touchstyle)}
@@ -43,7 +56,7 @@ export default class Footer extends Component {
             this.props.onFilterChange('SHOW_ACTIVE');
           }}
         >
-          <Text style={(styles.textstyle)}>Active</Text>
+          <Text style={(SHOW_ACTIVE === this.props.filter) ? (styles.textstyle) : (styles.textFalsestyle)}>Active</Text>
         </TouchableOpacity>
       </View>
     );
@@ -77,5 +90,11 @@ const styles = StyleSheet.create(
       alignItems: 'center',
     },
 
+    textFalsestyle: {
+      flex: 1,
+      fontSize: 20,
+      color: '#000000',
+      justifyContent: 'center',
+    },
   }
 );
