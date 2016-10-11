@@ -10,7 +10,8 @@ export const ADD_TODO = 'ADD_TODO';
 export const COMPLETE_TODO = 'COMPLETE_TODO';
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
 export const DELETE_TODO = 'DELETE_TODO';
-
+export const LOGIN_ON = 'LOGIN_ON';
+export const LOGIN_OFF = 'LOGIN_OFF';
 /*
  * 其它的常量
  */
@@ -39,4 +40,12 @@ export function setVisibilityFilter(filter) {
 
 export function deleteTodo(index) {
   return { type: DELETE_TODO, index };
+}
+
+export function loginOn(text) {
+  return { type: LOGIN_ON, texts: text };
+}
+
+export function loginOff() {
+  return { type: LOGIN_OFF };
 }

@@ -1,30 +1,42 @@
 import React, { Component, PropTypes } from 'react';
 import {
     View,
+    ToastAndroid,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { addTodo, completeTodo, VisibilityFilters, setVisibilityFilter } from '../actions';
+import { addTodo, completeTodo, VisibilityFilters, setVisibilityFilter, loginOn, loginOff } from '../actions';
 import AddTodo from '../components/AddTodo';
 import TodoList from '../components/TodoList';
 import Footer from '../components/Footer';
+import Login from '../components/Login';
 
 class App extends Component {
   render() {
         // Injected by connect() call:
         // 通过调用 connect() 注入:
-    const { dispatch, visibleTodos, visibilityFilter } = this.props;
+    const { dispatch, visibleTodos, visibilityFilter, visibleText } = this.props;
     return (
-      <View style={{ flex: 1 }}>
-        <AddTodo style={{ height: 100 }}
+      <View
+        style={{ flex: 1 }}
+      >
+        <Login
+          texts={visibleText}
+          onLoginOnClick={(text) => { dispatch(loginOn(text)); }}
+          onLoginOffClick={() => { dispatch(loginOff()); }}
+        />
+        <AddTodo
+          style={{ height: 100 }}
           onAddClick={(text) => { dispatch(addTodo(text)); }}
         />
-        <TodoList style={{ height: 200 }}
+        <TodoList
+          style={{ height: 200 }}
           todos={visibleTodos}
           onTodoClick={(index) => {
             dispatch(completeTodo(index));
           }}
         />
-        <Footer filter={visibilityFilter}
+        <Footer
+          filter={visibilityFilter}
           onFilterChange={(nextFilter) => {
             dispatch(setVisibilityFilter(nextFilter));
           }}
@@ -45,6 +57,7 @@ App.propTypes = {
     'SHOW_COMPLETED',
     'SHOW_ACTIVE',
   ]).isRequired,
+  visibleText: PropTypes.string.isRequired,
 };
 
 function selectTodos(todos, filter) {
@@ -64,6 +77,7 @@ function select(state) {
   return {
     visibleTodos: selectTodos(state.todos, state.visibilityFilter),
     visibilityFilter: state.visibilityFilter,
+    visibleText: state.login,
   };
 }
 
