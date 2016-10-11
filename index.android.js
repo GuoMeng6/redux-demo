@@ -11,15 +11,12 @@ import {
     ToastAndroid,
     AsyncStorage,
 } from 'react-native';
-import { persistStore, autoRehydrate } from 'redux-persist';
-import { asyncSessionStorage } from 'redux-persist/storages';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import App from './js/containers/App';
 import todoApp from './js/reducers';
+import { store } from './js/redux';
 
-const store = createStore(todoApp, undefined, autoRehydrate());
-persistStore(store, { storage: AsyncStorage });
 
 // const store = createStore(todoApp);
 class redux extends Component {

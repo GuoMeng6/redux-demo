@@ -37,8 +37,6 @@ export default class TodoList extends Component {
         </TouchableOpacity>
     );
   }
-
-
 }
 
 TodoList.propTypes = {

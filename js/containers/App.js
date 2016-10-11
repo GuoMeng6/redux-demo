@@ -4,6 +4,7 @@ import {
     ToastAndroid,
 } from 'react-native';
 import { connect } from 'react-redux';
+import { actions } from '../redux';
 import { addTodo, completeTodo, VisibilityFilters, setVisibilityFilter, loginOn, loginOff } from '../actions';
 import AddTodo from '../components/AddTodo';
 import TodoList from '../components/TodoList';
@@ -21,24 +22,24 @@ class App extends Component {
       >
         <Login
           texts={visibleText}
-          onLoginOnClick={(text) => { dispatch(loginOn(text)); }}
-          onLoginOffClick={() => { dispatch(loginOff()); }}
+          onLoginOnClick={(text) => { this.props.LOGIN_ON({ text }); }}
+          onLoginOffClick={() => { this.props.LOGIN_OFF(); }}
         />
         <AddTodo
           style={{ height: 100 }}
-          onAddClick={(text) => { dispatch(addTodo(text)); }}
+          onAddClick={(text) => { this.props.ADD_TODO({ text }); }}
         />
         <TodoList
           style={{ height: 200 }}
           todos={visibleTodos}
           onTodoClick={(index) => {
-            dispatch(completeTodo(index));
+            this.props.COMPLETE_TODO({ index });
           }}
         />
         <Footer
           filter={visibilityFilter}
-          onFilterChange={(nextFilter) => {
-            dispatch(setVisibilityFilter(nextFilter));
+          onFilterChange={(filter) => {
+            this.props.SET_VISIBILITY_FILTER({ filter });
           }}
         />
       </View>
@@ -83,4 +84,4 @@ function select(state) {
 
 
 // 包装 component ，注入 dispatch 和 state 到其默认的 connect(select)(App) 中；
-export default connect(select)(App);
+export default connect(select, actions)(App);
