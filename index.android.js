@@ -8,14 +8,22 @@ import React, { Component } from 'react';
 import {
     AppRegistry,
     StyleSheet,
+    ToastAndroid,
+    AsyncStorage,
 } from 'react-native';
+import { persistStore, autoRehydrate } from 'redux-persist';
+import { asyncSessionStorage } from 'redux-persist/storages';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import App from './js/containers/App';
 import todoApp from './js/reducers';
 
-const store = createStore(todoApp);
+const store = createStore(todoApp, undefined, autoRehydrate());
+persistStore(store, { storage: AsyncStorage });
+
+// const store = createStore(todoApp);
 class redux extends Component {
+
   render() {
     return (
       <Provider store={store}>
@@ -24,6 +32,7 @@ class redux extends Component {
         );
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {

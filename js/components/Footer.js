@@ -38,7 +38,11 @@ export default class Footer extends Component {
             ToastAndroid.show('showAll', ToastAndroid.SHORT);
             this.props.onFilterChange(SHOW_ALL); }}
         >
-          <Text style={(SHOW_ALL === this.props.filter) ? (styles.textstyle) : (styles.textFalsestyle)}>All</Text>
+          <Text
+            style={(SHOW_ALL === this.props.filter) ? (styles.textstyle) : (styles.textFalsestyle)}
+          >
+            All
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={(styles.touchstyle)}
