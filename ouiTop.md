@@ -1,1 +1,1 @@
-[open ouiTop](pesk://)
+<a href="pesk://">open ouiTop</a>
