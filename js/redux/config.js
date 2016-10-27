@@ -1,5 +1,6 @@
 export const login = {
   default: '',
+  persist: true,
   actions: {
     LOGIN_ON: {
       inputs: ['text'],
@@ -20,6 +21,7 @@ export const login = {
 
 export const todos = {
   default: [],
+  persist: true,
   actions: {
     ADD_TODO: {
       input: ['text'],
@@ -50,6 +52,7 @@ export const todos = {
 };
 export const visibilityFilter = {
   default: 'SHOW_ALL',
+  persist: true,
   actions: {
     SET_VISIBILITY_FILTER: {
       input: ['filter'],
